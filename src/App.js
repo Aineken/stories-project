@@ -1,57 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
+import Posts from "./components/Posts/Posts";
+import { fetchPosts } from "./actions/posts";
+import classes from "./styles.js";
+import memories from "./images/andrzul_logo.svg";
+import Form from "./components/Form/Form.js";
 
 function App() {
+  const [currentId, setCurrentId] = useState(0);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, [currentId, dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Container maxWidth="lg">
+      <AppBar sx={classes.appBar} position="static" color="inherit">
+        <Typography sx={{ color: "black" }} variant="h2">
+          Stories
+        </Typography>
+
+        <img
+          style={{ marginLeft: "15px" }}
+          src={memories}
+          alt="icon"
+          height="60"
+        />
+      </AppBar>
+      <Grow in>
+        <Container>
+          <Grid
+            container
+            justifyContent="space-between"
+            alignItems="stretch"
+            spacing={3}
           >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+            <Grid item xs={12} sm={4}>
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
+            </Grid>
+            <Grid item xs={12} sm={7}>
+              <Posts setCurrentId={setCurrentId} />
+            </Grid>
+          </Grid>
+        </Container>
+      </Grow>
+    </Container>
   );
 }
 

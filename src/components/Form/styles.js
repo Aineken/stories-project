@@ -7,6 +7,7 @@ export default createTheme({
     justifyContent: "center",
     gap: "10px",
     padding: "10px",
+    borderRadius: "10px",
   },
   fileInput: {
     width: "100%",
