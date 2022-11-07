@@ -25,7 +25,7 @@ export const postsSlice = createSlice({
       })
       .addCase(updatePost.fulfilled, (state, action) => {
         state.posts = state.posts.map((post) =>
-          post._id === action.payload ? action.payload : post
+          post._id === action.payload._id ? action.payload : post
         );
       })
       .addCase(likePost.fulfilled, (state, action) => {

@@ -31,18 +31,14 @@ export const updatePost = createAsyncThunk("posts/updatePost", async (post) => {
   }
 });
 
-export const likePost = createAsyncThunk(
-  "posts/likePost",
-
-  async (id) => {
-    try {
-      const { data } = await api.likePost(id);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
+export const likePost = createAsyncThunk("posts/likePost", async (id) => {
+  try {
+    const { data } = await api.likePost(id);
+    return data;
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
 export const deletePost = createAsyncThunk(
   "posts/deletePost",
