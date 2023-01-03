@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://memories-project-andrzul.herokuapp.com/posts";
+const url = "https://mongodb-test-lnul3kcvf-aineken.vercel.app/posts";
 
 export const getPosts = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);
